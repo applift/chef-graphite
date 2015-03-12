@@ -6,10 +6,10 @@ description       "Installs and configures Graphite."
 version           "0.1.6"
 recipe            "graphite", "Installs and configures Graphite and all of its components"
 recipe            "graphite::carbon", "Installs and configures Carbon"
-recipe            "graphite::dashboard", "Installs and configures the Graphite dashboard"
+recipe            "graphite::web", "Installs and configures the Graphite web interface"
 recipe            "graphite::whisper", "Installs and configures Whisper"
 
-%w{ apache2 logrotate python yum yum-epel build-essential }.each do |d|
+%w{ nginx logrotate python yum yum-epel build-essential }.each do |d|
   depends d
 end
 

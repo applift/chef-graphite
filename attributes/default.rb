@@ -10,23 +10,26 @@ default["graphite"]["carbon"]["whisper_dir"]                = "#{node["graphite"
 default["graphite"]["carbon"]["max_cache_size"]             = "inf"
 default["graphite"]["carbon"]["max_creates_per_minute"]     = "inf"
 default["graphite"]["carbon"]["max_updates_per_second"]     = "1000"
-default["graphite"]["dashboard"]["timezone"]                = "America/New_York"
-default["graphite"]["dashboard"]["memcache_hosts"]          = [ "127.0.0.1:11211" ]
-default["graphite"]["dashboard"]["mysql_server"]            = ""
-default["graphite"]["dashboard"]["mysql_port"]              = ""
-default["graphite"]["dashboard"]["mysql_username"]          = ""
-default["graphite"]["dashboard"]["mysql_password"]          = ""
 
-# The default values template
-default["graphite"]["templates"]["default"]["background"]   = "black"
-default["graphite"]["templates"]["default"]["foreground"]   = "white"
-default["graphite"]["templates"]["default"]["majorLine"]    = "white"
-default["graphite"]["templates"]["default"]["minorLine"]    = "grey"
-default["graphite"]["templates"]["default"]["lineColors"]   = "blue,green,red,purple,brown,yellow,aqua,grey,magenta,pink,gold,rose"
-default["graphite"]["templates"]["default"]["fontName"]     = "Sans"
-default["graphite"]["templates"]["default"]["fontSize"]     = "10"
-default["graphite"]["templates"]["default"]["fontBold"]     = "False"
-default["graphite"]["templates"]["default"]["fontItalic"]   = "False"
+default['graphite']['web']['secretkey'] = '0aed5c39507562f4519c2d47515e8221'
+default['graphite']['web']['timezone'] = 'Europe/Dublin'
+default['graphite']['web']['server'] = 'uwsgi'
+default["graphite"]["web"]["memcache_hosts"]          = ""
+default["graphite"]["web"]["mysql_server"]            = ""
+default["graphite"]["web"]["mysql_port"]              = ""
+default["graphite"]["web"]["mysql_username"]          = ""
+default["graphite"]["web"]["mysql_password"]          = ""
+
+# This does not update after initial setup
+default['graphite']['web']['seed_password'] = 'changeme'
+
+# These defaults are overridden in the _nginx recipe
+default['graphite']['uwsgi']['listen_ip']   = '0.0.0.0'
+default['graphite']['uwsgi']['listen_port'] = 8080
+
+# The template will use the host's FQDN unless this attribute is set
+default['graphite']['nginx']['hostname'] = nil
+default['graphite']['nginx']['disable_default_vhost'] = false
 
 #Storage Schemas
 default["graphite"]["storage_schemas"] = [
