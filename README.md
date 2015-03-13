@@ -18,7 +18,7 @@ and [Infochimps](https://github.com/infochimps-labs/ironfan-pantry/blob/master/c
 
 ### Cookbooks
 
-* apache2
+* nginx
 * build-essential
 * logrotate
 * python
@@ -45,13 +45,13 @@ and [Infochimps](https://github.com/infochimps-labs/ironfan-pantry/blob/master/c
 * `node["graphite"]["carbon"]["max_creates_per_minute"]` - Maximum creates per minute (in points).
 * `node["graphite"]["carbon"]["max_updates_per_second"]` - Maximum updates per second (in points).
 * `node["graphite"]["carbon"]["whisper_dir"]` - Location of whisper data files.
-* `node["graphite"]["dashboard"]["timezone"]` - Default dashboard timezone.
-* `node["graphite"]["dashboard"]["memcache_hosts"]` - Array of IP and port pairs
+* `node["graphite"]["web"]["timezone"]` - Default dashboard timezone.
+* `node["graphite"]["web"]["memcache_hosts"]` - Array of IP and port pairs
   for memcached.
-* `node["graphite"]["dashboard"]["mysql_server"]` - MySQL host.
-* `node["graphite"]["dashboard"]["mysql_port"]` - MySQL port.
-* `node["graphite"]["dashboard"]["mysql_username"]` - MySQL username.
-* `node["graphite"]["dashboard"]["mysql_password"]` - MySQL password.
+* `node["graphite"]["web"]["mysql_server"]` - MySQL host.
+* `node["graphite"]["web"]["mysql_port"]` - MySQL port.
+* `node["graphite"]["web"]["mysql_username"]` - MySQL username.
+* `node["graphite"]["web"]["mysql_password"]` - MySQL password.
 * `node["graphite"]["templates"]` - Additional template defintions
 * `node["graphite"]["storage_schemas"]` - Array of hashes that define a storage
   schema.  See default attributes for an example.
@@ -74,7 +74,7 @@ and [Infochimps](https://github.com/infochimps-labs/ironfan-pantry/blob/master/c
 
 * `recipe[graphite]` will install Graphite and all of its components.
 * `recipe[graphite::carbon]` will install Carbon.
-* `recipe[graphite::dashboard]` will install Graphite's dashboard.
+* `recipe[graphite::web]` will install Graphite's dashboard.
 * `recipe[graphite::whisper]` will install Whisper.
 
 ## Usage
