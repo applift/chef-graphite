@@ -9,7 +9,7 @@ upstream graphite {
 }
 
 server {
-  listen 8080;
+  listen <%= node["graphite"]["port"] %>;
   server_name <%= node['graphite']['nginx']['hostname'] || node.fqdn %>;
   charset utf-8;
   client_max_body_size 15M;
