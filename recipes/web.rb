@@ -32,14 +32,12 @@ end
 template "#{node['graphite']['home']}/webapp/local_settings.py" do
   mode "0644"
   source "local_settings.py.erb"
-  owner 'root'
-  group 'root'
+  owner node["nginx"]["user"]
+  group node["nginx"]["user"]
   variables(
     :home           => node["graphite"]["home"],
     :whisper_dir    => node["graphite"]["carbon"]["whisper_dir"],
     :timezone       => node["graphite"]["web"]["timezone"],
-    :secretkey      => node["graphite"]["web"]["secretkey"],
-    :memcache_hosts => node["graphite"]["web"]["memcache_hosts"],
     :mysql_server   => node["graphite"]["web"]["mysql_server"],
     :mysql_username => node["graphite"]["web"]["mysql_username"],
     :mysql_password => node["graphite"]["web"]["mysql_password"],
@@ -73,7 +71,7 @@ logrotate_app "dashboard" do
   path "#{node['graphite']['home']}/storage/log/webapp/*.log"
   frequency "daily"
   rotate 7
-  create "644 root root"
+  create "644 #{node["nginx"]["user"]} #{node["nginx"]["group"]}"
 end
 
 include_recipe "graphite::_nginx"

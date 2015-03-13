@@ -7,7 +7,7 @@
 [uwsgi]
 plugins-dir = /usr/lib/uwsgi/plugins
 plugins = python
-uid = root
-gid = root
+uid = <%= node["nginx"]["user"] %>
+gid = <%= node["nginx"]["group"] %>
 wsgi-file = /usr/share/graphite-web/graphite.wsgi
 http-socket = <%= node['graphite']['uwsgi']['listen_ip'] %>:<%= node['graphite']['uwsgi']['listen_port'] %>
