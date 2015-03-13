@@ -1,11 +1,10 @@
-site :opscode
+source "https://supermarket.chef.io"
 
 metadata
+
+cookbook 'graphite-api', '~> 1.2.2'
 
 group :integration do
   cookbook "apt"
   cookbook "yum"
-
-  # Future, when/if minitest support for this cookbook is added
-  #cookbook "minitest-handler"
 end

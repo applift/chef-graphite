@@ -17,4 +17,10 @@ suites:
 - name: default
   run_list:
   - recipe[graphite]
-  attributes: {}
+  attributes:
+    graphite_api:
+      whisper:
+        directories: ['/opt/storate/whisper']
+    graphite:
+      carbon:
+        line_receiver_interface: "0.0.0.0"
