@@ -1,7 +1,11 @@
 ## Description
 
-Installs and configures Graphite without any web server serving the dashboard.
+Installs and configures Graphite.
+
+
 It uses Graphite-API to serve data as JSON.
+
+
 Much of the work in this cookbook reflects work done by
 [Hetcastro](https://github.com/hectcastro/chef-graphite)
 
@@ -21,6 +25,7 @@ Should work on:
 ### Cookbooks
 
 * graphite-api
+* nginx
 * logrotate
 * python
 * yum
