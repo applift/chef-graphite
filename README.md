@@ -1,25 +1,26 @@
-# graphite [![Build Status](https://secure.travis-ci.org/hectcastro/chef-graphite.png?branch=master)](http://travis-ci.org/hectcastro/chef-graphite)
-
 ## Description
 
-Installs and configures Graphite.  Much of the work in this cookbook reflects
-work done by [Heavy Water Software](https://github.com/heavywater/chef-graphite)
-and [Infochimps](https://github.com/infochimps-labs/ironfan-pantry/blob/master/cookbooks/graphite).
+Installs and configures Graphite without any web server serving the dashboard.
+It uses Graphite-API to serve data as JSON.
+Much of the work in this cookbook reflects work done by
+[Hetcastro](https://github.com/hectcastro/chef-graphite)
 
 ## Requirements
 
 ### Platforms
 
+Tested on Ubuntu 12.04 (Precise)
+
+Should work on:
+
 * Amazon Linux 2013.03
 * CentOS 6
 * Red Hat 6
 * Ubuntu 11.10 (Oneiric)
-* Ubuntu 12.04 (Precise)
 
 ### Cookbooks
 
-* nginx
-* build-essential
+* graphite-api
 * logrotate
 * python
 * yum
@@ -45,41 +46,22 @@ and [Infochimps](https://github.com/infochimps-labs/ironfan-pantry/blob/master/c
 * `node["graphite"]["carbon"]["max_creates_per_minute"]` - Maximum creates per minute (in points).
 * `node["graphite"]["carbon"]["max_updates_per_second"]` - Maximum updates per second (in points).
 * `node["graphite"]["carbon"]["whisper_dir"]` - Location of whisper data files.
-* `node["graphite"]["web"]["timezone"]` - Default dashboard timezone.
-* `node["graphite"]["web"]["memcache_hosts"]` - Array of IP and port pairs
-  for memcached.
-* `node["graphite"]["web"]["mysql_server"]` - MySQL host.
-* `node["graphite"]["web"]["mysql_port"]` - MySQL port.
-* `node["graphite"]["web"]["mysql_username"]` - MySQL username.
-* `node["graphite"]["web"]["mysql_password"]` - MySQL password.
-* `node["graphite"]["templates"]` - Additional template defintions
 * `node["graphite"]["storage_schemas"]` - Array of hashes that define a storage
   schema.  See default attributes for an example.
 * `node["graphite"]["storage_aggregation"]` – Array of hashes that define
   storage aggregation.  See default attributes for an example.
 
-### Default Template Definition
-
-* `default["graphite"]["templates"]["default"]["background"]`   = "black"
-* `default["graphite"]["templates"]["default"]["foreground"]`   = "white"
-* `default["graphite"]["templates"]["default"]["majorLine"]`    = "white"
-* `default["graphite"]["templates"]["default"]["minorLine"]`    = "grey"
-* `default["graphite"]["templates"]["default"]["lineColors"]`   = "blue,green,red,purple,brown,yellow,aqua,grey,magenta,pink,gold,rose"
-* `default["graphite"]["templates"]["default"]["fontName"]`     = "Sans"
-* `default["graphite"]["templates"]["default"]["fontSize"]`     = "10"
-* `default["graphite"]["templates"]["default"]["fontBold"]`     = "False"
-* `default["graphite"]["templates"]["default"]["fontItalic"]`   = "False"
+For Graphite-API attributes refer to this [cookbook](https://github.com/odolbeau/cookbook-graphite-api)
 
 ## Recipes
 
 * `recipe[graphite]` will install Graphite and all of its components.
 * `recipe[graphite::carbon]` will install Carbon.
-* `recipe[graphite::web]` will install Graphite's dashboard.
 * `recipe[graphite::whisper]` will install Whisper.
 
 ## Usage
 
-Graphite's credentials default to username `root` and password `root` with an
-e-mail address going no where.  Also, two schemas are provided by default:
+This cookbook should be used in conjunction with a dashboard manager as Grafana.
+Two schemas are provided by default:
 `stats.*` for [StatsD](https://github.com/etsy/statsd) and a catchall that
 matches anything.

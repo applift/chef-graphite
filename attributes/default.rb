@@ -11,19 +11,23 @@ default["graphite"]["carbon"]["max_cache_size"]             = "inf"
 default["graphite"]["carbon"]["max_creates_per_minute"]     = "inf"
 default["graphite"]["carbon"]["max_updates_per_second"]     = "1000"
 
-default['graphite']['web']['timezone'] = 'Europe/Dublin'
-default["graphite"]["web"]["mysql_server"]            = ""
-default["graphite"]["web"]["mysql_port"]              = ""
-default["graphite"]["web"]["mysql_username"]          = ""
-default["graphite"]["web"]["mysql_password"]          = ""
 
-# These defaults are overridden in the _nginx recipe
-default['graphite']['uwsgi']['listen_ip']   = '0.0.0.0'
-default['graphite']['uwsgi']['listen_port'] = 8080
+# You can choose between "package" (for debian base OS) or "pip"
+default['graphite_api']['install_method'] = 'pip'
 
-# The template will use the host's FQDN unless this attribute is set
-default['graphite']['nginx']['hostname'] = nil
-default['graphite']['nginx']['disable_default_vhost'] = false
+default['graphite_api']['search_index'] = '/srv/graphite/index'
+default['graphite_api']['time_zone'] = 'Europe/Berlin'
+default['graphite_api']['functions'] = ['graphite_api.functions.SeriesFunctions', 'graphite_api.functions.PieFunctions']
+default['graphite_api']['finders'] = []
+
+# Whisper config
+default['graphite_api']['whisper'] = {
+  'enabled' => true,
+  'directories' => ['#{node["graphite"]["home"]}/graphite/whisper']
+}
+if node['graphite_api']['whisper']['enabled'] == true
+  default['graphite_api']['finders'] |= ['graphite_api.finders.whisper.WhisperFinder']
+end
 
 #Storage Schemas
 default["graphite"]["storage_schemas"] = [

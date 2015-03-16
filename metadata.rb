@@ -8,7 +8,7 @@ recipe            "graphite", "Installs and configures Graphite and all of its c
 recipe            "graphite::carbon", "Installs and configures Carbon"
 recipe            "graphite::whisper", "Installs and configures Whisper"
 
-%w{ graphite-api nginx logrotate python yum yum-epel build-essential }.each do |d|
+%w{ graphite-api logrotate python yum yum-epel }.each do |d|
   depends d
 end
 
