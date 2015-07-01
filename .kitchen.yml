@@ -20,7 +20,7 @@ suites:
   attributes:
     graphite_api:
       whisper:
-        directories: ['/opt/storate/whisper']
+        directories: ['/opt/storage/whisper']
     graphite:
       carbon:
         line_receiver_interface: "0.0.0.0"

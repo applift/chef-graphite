@@ -1,0 +1,19 @@
+# /etc/nginx/sites-available/graphite.conf
+
+upstream graphite {
+    server 127.0.0.0:8888 fail_timeout=0;
+}
+
+server {
+    server_name graph;
+    listen 80 default;
+    root /srv/www/graphite;
+
+    location / {
+        try_files $uri @graphite;
+    }
+
+    location @graphite {
+        proxy_pass http://graphite;
+    }
+}
