@@ -1,0 +1,27 @@
+# /etc/nginx/sites-available/graphite.conf
+
+upstream graphite {
+    server 0.0.0.0:8888 fail_timeout=0;
+}
+
+server {
+    server_name graph;
+    listen 80 default;
+    root /srv/www/graphite;
+
+    location / {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+        try_files $uri @graphite;
+    }
+
+    location @graphite {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+        proxy_pass http://graphite;
+    }
+}

@@ -34,9 +34,6 @@ TIME_ZONE = '<%= @timezone %>'
 # You should not use the loopback address (127.0.0.1) here if using clustering
 # as every webapp in the cluster should use the exact same values to prevent
 # unneeded cache misses. Set to [] to disable caching of images and fetched data
-<% unless @memcache_hosts.empty? %>
-MEMCACHE_HOSTS = ['<%= @memcache_hosts.join("', '") %>']
-<% end %>
 #DEFAULT_CACHE_DURATION = 60 # Cache images and data for 1 minute
 
 

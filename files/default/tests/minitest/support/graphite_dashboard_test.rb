@@ -38,8 +38,8 @@ describe_recipe "graphite::dashboard" do
   end
 
   describe "services" do
-    it "runs apache" do
-      service("apache2").must_be_running
+    it "runs nginx" do
+      service("nginx").must_be_running
     end
 
     it "responds to requests" do

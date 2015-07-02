@@ -16,8 +16,8 @@ end
 template "#{node['graphite']['home']}/conf/carbon.conf" do
   mode "0644"
   source "carbon.conf.erb"
-  owner node["apache"]["user"]
-  group node["apache"]["group"]
+  owner node["nginx"]["user"]
+  group node["nginx"]["group"]
   variables(
     :whisper_dir                => node["graphite"]["carbon"]["whisper_dir"],
     :line_receiver_interface    => node["graphite"]["carbon"]["line_receiver_interface"],
@@ -34,21 +34,21 @@ end
 template "#{node['graphite']['home']}/conf/storage-schemas.conf" do
   mode "0644"
   source "storage-schemas.conf.erb"
-  owner node["apache"]["user"]
-  group node["apache"]["group"]
+  owner node["nginx"]["user"]
+  group node["nginx"]["group"]
   notifies :restart, "service[carbon-cache]"
 end
 
 template "#{node['graphite']['home']}/conf/storage-aggregation.conf" do
   mode "0644"
   source "storage-aggregation.conf.erb"
-  owner node["apache"]["user"]
-  group node["apache"]["group"]
+  owner node["nginx"]["user"]
+  group node["nginx"]["group"]
   notifies :restart, "service[carbon-cache]"
 end
 
 execute "chown" do
-  command "chown -R #{node["apache"]["user"]}:#{node["apache"]["group"]} #{node['graphite']['home']}/storage"
+  command "chown -R #{node["nginx"]["user"]}:#{node["nginx"]["group"]} #{node['graphite']['home']}/storage"
   only_if do
     f = File.stat("#{node['graphite']['home']}/storage")
     f.uid == 0 && f.gid == 0

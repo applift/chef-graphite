@@ -17,7 +17,7 @@ class Erubis::RubyEvaluator::GraphiteConf
   def self.key_value_to_str(k, v)
     case v.class.to_s
     when "String", "Fixnum", "Float"
-      return key_to_str(k) + " = " + v 
+      return key_to_str(k) + " = " + v
     when "Array", "Regex"
       return key_to_str(k) + " = " + v.inspect
     when "Hash", "Mash"
@@ -29,7 +29,7 @@ class Erubis::RubyEvaluator::GraphiteConf
   end
 
   public
-  
+
   def self.section_to_str(section, version=nil, patterns_dir=nil)
     result = []
     section.each do |output|
@@ -44,5 +44,5 @@ class Erubis::RubyEvaluator::GraphiteConf
     end
     return result.join("\n")
   end
-  
+
 end

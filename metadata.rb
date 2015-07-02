@@ -1,18 +1,17 @@
 name              "graphite"
-maintainer        "Hector Castro"
-maintainer_email  "hectcastro@gmail.com"
+maintainer        "Giuseppe Correnti"
+maintainer_email  "correnti.g@gmail.com"
 license           "Apache 2.0"
-description       "Installs and configures Graphite."
-version           "0.1.6"
+description       "Installs and configures Graphite (API only no dashboard)"
+version           "0.0.1"
 recipe            "graphite", "Installs and configures Graphite and all of its components"
 recipe            "graphite::carbon", "Installs and configures Carbon"
-recipe            "graphite::dashboard", "Installs and configures the Graphite dashboard"
 recipe            "graphite::whisper", "Installs and configures Whisper"
 
-%w{ apache2 logrotate python yum yum-epel build-essential }.each do |d|
+%w{ nginx graphite-api logrotate python yum yum-epel }.each do |d|
   depends d
 end
 
-%w{ centos redhat ubuntu amazon }.each do |os|
+%w{ ubuntu }.each do |os|
     supports os
 end
